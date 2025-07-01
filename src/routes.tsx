@@ -3,13 +3,11 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { HomePage } from "@/page/Home/index";
 import { Layout } from "@/components/layout/Layout";
 import CustomScroll from "@/components/scroll/CustomScroll";
-//import { AppPage } from "../pages/AppPage";
-//import { AuthPageController } from "../pages/AuthForm";
 import { useAppSelector } from "@/app/hooks";
-import { useRefreshTokenMutation } from "@/services/auth";
-import { PoliticalPage } from "./page/Political";
-import AuthPageController from "./page/Auth";
-import { CommunicatePage } from "./page/Communicate";
+import { PoliticalPage } from "@/page/Political";
+import AuthPageController from "@/page/Auth";
+import { CommunicatePage } from "@/page/Communicate";
+import { useRefreshTokenMutation } from "@/features/auth";
 
 const ProtectedRoute: React.FC<{
     isAuth: boolean;
