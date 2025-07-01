@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { useServerJournalContext } from "@/contexts/ServerJournalSocketContext";
+import { useLogoutUserMutation } from "@/features/auth";
 import { setActiveChat } from "@/features/chat";
 import { initCreateServer, setActiveServer, useGetServersQuery } from "@/features/server";
-import { useLogoutUserMutation } from "@/services/auth";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "@/app/hooks";
-import { useLazyGetInfoUserQuery } from "@/services/user";
+import { useLazyGetInfoUserQuery } from "@/features/user";
 
 export const MemberChatServer: React.FC = () => {
     const membersServer = useAppSelector(s => s.server.activeserver?.users);

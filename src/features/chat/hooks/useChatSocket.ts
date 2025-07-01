@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { useRefreshTokenQueryQuery } from "../../../services/auth";
 import { config } from "../../../config";
+import { useRefreshTokenQueryQuery } from "@/features/auth";
 
 export const useChatSocket = () => {
     const socketRef = useRef<Socket | null>(null);

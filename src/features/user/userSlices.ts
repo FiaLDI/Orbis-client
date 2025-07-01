@@ -1,8 +1,8 @@
 // features/authSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { userApi } from "../../services/user";
 import { UserInfo, userState } from "./types/user";
+import { userApi } from "./api/userApi";
 
 
 

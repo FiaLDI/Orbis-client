@@ -41,9 +41,9 @@ export const PagesRouter: React.FC = () => {
         refresh();
     }, []);
 
-    // if (isRefreshing) {
-    //     return <div className="main-app">Loading...</div>; // Показать индикатор загрузки, пока обновляется токен
-    // }
+    if (isRefreshing) {
+        return <div className="main-app">Loading...</div>; // Показать индикатор загрузки, пока обновляется токен
+    }
 
     return (
         <BrowserRouter>

@@ -1,5 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authApi } from "../services/auth";
 import { messageApi } from "../features/chat/api/chatApi";
 import authReducer from "../features/auth/authSlice";
 import messageReducer from "../features/chat/chatSlice";
@@ -9,8 +8,9 @@ import userReducer from "../features/user/userSlices";
 import uploadReducer from '../features/upload/uploadSlice';
 import actionReducer from '../features/action/actionSlice';
 import { serverApi } from "../features/server/api/serverApi";
-import { userApi } from "../services/user";
 import { voiceApi } from "../features/voice/api/voiceApi";
+import { authApi } from "@/features/auth";
+import { userApi } from "@/features/user";
 
 export const store = configureStore({
     reducer: {

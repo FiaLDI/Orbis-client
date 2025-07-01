@@ -1,9 +1,9 @@
 import React from "react";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useGetChatsUsersQuery } from "@/services/user";
 import { setActiveChat } from "@/features/chat";
 import { ChatItem } from "./ChatItem";
 import { VoiceComponets } from "@/features/voice";
+import { useGetChatsUsersQuery } from "@/features/user";
 
 export const MessageMenu: React.FC = () => {
     const chats = useAppSelector((state) => state.user.chats);
