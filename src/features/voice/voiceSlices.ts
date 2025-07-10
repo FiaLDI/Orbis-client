@@ -2,8 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { voiceApi } from "./api/voiceApi";
 import { Info, PeerInfo, VoiceState } from "./types/voice.types";
 
-
-
 const initialState: VoiceState = {
     roomPeers: [],
     status: 'idle',
@@ -68,7 +66,7 @@ export const voiceSlice = createSlice({
                     state.roomPeers = []
                 },
             )
-                
+            
         },
 });
 

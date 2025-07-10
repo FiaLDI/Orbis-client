@@ -8,18 +8,18 @@ import { config } from "@/config";
 const SingleMessageComponent: React.FC<SingleMessageProps> = ({ message, onClick }) => {
   const selectIsOpen = useMemo(() => makeSelectIsMessageOpen(String(message.id)), [message.id]);
   const isOpen = useAppSelector(selectIsOpen);
-
   return (
     <div
       onContextMenu={onClick}
+      
       className={isOpen ? " bg-[#7895f3] flex gap-3" : "flex gap-3"}
     >
-      <div className="p-1">
+      <div className=" self-start p-1">
         <img
           src="/img/icon.png"
           alt={`Аватар ${message.username}`}
-          width={50}
-          height={50}
+          width={40}
+          height={40}
         />
       </div>
       <div className="" >

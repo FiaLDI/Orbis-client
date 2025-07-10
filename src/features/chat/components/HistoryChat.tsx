@@ -70,7 +70,7 @@ const HistoryChat: React.FC<{ bottomRef: React.RefObject<HTMLDivElement> }> = ({
     }
   
     return (
-        <div className="overflow-hidden bg-[#25309b88] p-5 h-screen text-white"  >
+        <div className="overflow-y-scroll bg-[#25309b88] p-4 h-screen text-white flex flex-col gap-3"  >
             {history.map((message: any, idx) => (
                 <SingleMessage 
                     key={`single-${message.chat_id}-${idx}`} 
@@ -82,7 +82,7 @@ const HistoryChat: React.FC<{ bottomRef: React.RefObject<HTMLDivElement> }> = ({
                 {menuVisible && (
             <ul
                 ref={menuRef}
-                className=""
+                className="p-5 flex gap-3 flex-col bg-[#25309b88]"
                 
                 style={{
                     position: "fixed",

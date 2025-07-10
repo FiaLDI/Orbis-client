@@ -38,12 +38,12 @@ export const voiceApi = createApi({
                 url: `/rooms/${id}/peers`,
                 method: "GET",
             }),
-        })
+        }),
     }),
 });
 
 export const {
     useLazyGetPeersInRoomQuery,
     useJoinRoomMutation,
-    useLeaveRoomMutation
+    useLeaveRoomMutation,
 } = voiceApi;

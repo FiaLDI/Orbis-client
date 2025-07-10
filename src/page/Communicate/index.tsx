@@ -1,13 +1,15 @@
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { setActiveChat, useChatMessages } from "@/features/chat";
-import { CreateServerForm, setActiveServer, useLazyGetServersMembersQuery } from "@/features/server";
+import { CreateServerForm, setActiveServer, useLazyGetServersInsideQuery, useLazyGetServersMembersQuery } from "@/features/server";
 import { FriendList, Search, UserProfile } from "@/features/user";
 import { setBigMode, VoiceComponets } from "@/features/voice";
 import React, { useEffect } from "react";
 import { AppMenu } from "./components/AppMenu";
-import { MessageMenu } from "./components/MessagesMenu";
+import { MessageMenu } from "./components/personal/MessagesMenu";
 import { MemberChatServer } from "./components/server/MemberChatServer";
-import { Action } from "./components/personal/Action";
+import { Action } from "./components/personal/ActionPersonal";
+import { ActionServer } from "./components/server/ActionServer";
+import { MessageServerMenu } from "./components/server/MessagesServerMenu";
 
 export const CommunicatePage: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -18,6 +20,7 @@ export const CommunicatePage: React.FC = () => {
     const isConnection = (status === 'connected');
     const bigMode = useAppSelector(s => s.voice.bigMode);
     const [trigger] = useLazyGetServersMembersQuery();
+    const [getServer] = useLazyGetServersInsideQuery();
     
     const activeServerId = server.activeserver?.id;
     
@@ -25,6 +28,7 @@ export const CommunicatePage: React.FC = () => {
         if (activeServerId) {
             dispatch(setBigMode(false));
             trigger(activeServerId);
+            getServer(activeServerId)
             dispatch(setActiveChat(undefined));
         }
     }, [activeServerId]);
@@ -37,19 +41,31 @@ export const CommunicatePage: React.FC = () => {
 
     const {} = useChatMessages();
 
-    // const {
-    //     localPeerId,
-    // } = useDelayedVoiceChat();
-
     const hasActiveChat = Boolean(activeChat);
     const hasActiveServer = Boolean(server.activeserver);
 
     if (hasActiveServer) {
         return (
-            <>
+            <div className="flex h-screen w-screen">
+            <AppMenu />
+            <MessageServerMenu />
+
+            {(isConnection && bigMode) &&
+                <div className="w-full h-full flex flex-col justify-between items-center p-10">
+                    <VoiceComponets.VoiceMemberManager />
+                 </div>
+            }
             
+            {(hasActiveChat && !bigMode) ? (
+                <div className="w-full h-screen">
+                    <ActionServer />
+                </div>
+                
+            ): !bigMode  && (<div className="w-full"></div>)}
+            <CreateServerForm />
+            <UserProfile />
             {hasActiveServer && <MemberChatServer />}
-            </>
+            </div>
         )
     }
 
@@ -68,7 +84,7 @@ export const CommunicatePage: React.FC = () => {
             {/* {Поиск друзей} */}
             <Search />
 
-            {/* {На сервере: чаты и голосовые сервера, в лс: чаты пользователя} */}
+            {/* {чаты пользователя} */}
             <MessageMenu />
 
             {(isConnection && bigMode) &&

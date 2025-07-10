@@ -1,3 +1,4 @@
+import { Upload } from "lucide-react";
 import React, { useState, ChangeEvent } from "react";
 
 type FileUploaderProps = {
@@ -87,8 +88,8 @@ const FileUploader: React.FC<FileUploaderProps> = ({ onUploaded }) => {
   };
 
   return (
-    <label className="flex custom-file-upload w-15 h-10 p-2 file cursor-pointer relative">
-      
+    <label className="flex custom-file-upload w-15 h-10 p-2 file cursor-pointer relative ">
+      <Upload className="absolute top-0 hover:brightness-90" color="#fff" size={40} strokeWidth={1.25} />
       <input className="absolute -z-1 bg-amber-50 w-10 h-10 top-0 bottom-0" type="file" multiple onChange={onChange} />
       {/* <ul>
          {files.map(({ file, progress, error }) => (

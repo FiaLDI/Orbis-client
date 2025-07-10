@@ -1,23 +1,23 @@
 import { useEffect, useCallback} from "react"
-import { useVoiceSocketContext } from "../../../contexts/VoiceSocketContext";
+import { useVoiceSocketContext } from "@/contexts/VoiceSocketContext";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { useDeviceContext } from "../../../contexts/DeviceContext";
-import { resetVoiceState, setChat, setMyPeer, setStatus, } from "../../../features/voice/voiceSlices";
+import { useDeviceContext } from "@/contexts/DeviceContext";
+import { resetVoiceState, setChat, setMyPeer, setStatus, } from "../voiceSlices";
 import { useJoinRoomMutation, useLazyGetPeersInRoomQuery, useLeaveRoomMutation } from "../api/voiceApi";
 import { useSocketHandlers } from "./soketHandlers";
 import { Transport } from "mediasoup-client/lib/types";
-import { useMediaStreamContext } from "../../../contexts/MediaStreamContext";
-import { useTransportContext } from "../../../contexts/TransportContext";
+import { useMediaStreamContext } from "@/contexts/MediaStreamContext";
+import { useTransportContext } from "@/contexts/TransportContext";
 import { useConsumeMedia } from "./consume";
 
 export const useJoinVoiceRoom = () => {
   const dispatch = useAppDispatch();
   const authInfo = useAppSelector((state) => state.auth.user?.info);
   const { socket } = useVoiceSocketContext();
-
+  
   const waitForSocketConnection = async (timeout = 5000): Promise<void> => {
     if (socket?.connected) return;
-
+    
     return new Promise((resolve, reject) => {
       const timer = setTimeout(() => {
         reject(new Error("Socket connection timeout"));
@@ -42,12 +42,12 @@ export const useJoinVoiceRoom = () => {
 
   const join = async (roomId: string): Promise<boolean> => {
     if (!authInfo?.username || !authInfo?.id || !socket) return false;
-
+    
     try {
       await waitForSocketConnection();
 
-      const { peerId } = await emitWithTimeout<{ peerId: string }>("get-id", {}, 5000);
-
+      const { peerId } = await emitWithTimeout<{ peerId: string }>("get-id", {}, 1000);
+      
       dispatch(setMyPeer({
         userId: String(authInfo.id),
         peerId,
@@ -57,6 +57,7 @@ export const useJoinVoiceRoom = () => {
       }));
 
       dispatch(setChat(roomId));
+      
       return true;
 
     } catch (err) {
@@ -74,13 +75,12 @@ export const useConnectToVoiceRoom = () => {
   const { socket } = useVoiceSocketContext();
   const { device, initDevice } = useDeviceContext();
   const user = useAppSelector((s) => s.voice.myPeer);
-  const userIdd = useAppSelector((s) => s.auth.user?.info.id);
   const consumeMedia = useConsumeMedia();
   const peers = useAppSelector(s => s.voice.roomPeers);
   const roomId = useAppSelector((s) => s.voice.roomId);
   const [connectToServer] = useJoinRoomMutation();
   const status = useAppSelector((s) => s.voice.status)
-  const [getPeers, {data, isSuccess}] = useLazyGetPeersInRoomQuery();
+  const [getPeers] = useLazyGetPeersInRoomQuery();
 
   const {
     sendTransportRef,
@@ -105,11 +105,22 @@ export const useConnectToVoiceRoom = () => {
     });
   }, [peers, consumeMedia, status]);
 
-  const connectRoom = useCallback(async () => {
-    console.log(status)
-    if (status !== 'needconn') return;
+  console.log(status)
 
+  const connectRoom = useCallback(async ({signal}: {signal?: AbortSignal}) => {
+    if (signal?.aborted) {
+      throw new DOMException('Aborted', 'AbortError');
+    }
+
+    if (status === 'connected') {
+      dispatch(setStatus('needdisc'))
+      //dispatch(setStatus('needconn'))
+    }
+
+    if (status !== 'needconn') return;
+    
     if (!socket?.connected || !user || !roomId) return;
+    
 
     // if (!socket.connected) {
     //   await new Promise<void>((resolve) => socket.once("connect", () => resolve()));
@@ -242,13 +253,31 @@ export const useConnectToVoiceRoom = () => {
   }, [socket, user, roomId, connectToServer, initDevice, status]);
 
   useEffect(() => {
-    let isCancelled = false;
-    if (!isCancelled) connectRoom();
+  const abortController = new AbortController();
+
+    async function startConnection() {
+      try {
+        await connectRoom({ signal: abortController.signal });
+      } catch (err: any) {
+        if (err.name === 'AbortError') {
+          console.log('Connection aborted');
+        } else {
+          console.error(err);
+        }
+      }
+    }
+    if (status === 'connecting' || status === 'connected') return; // уже подключаемся/подключены, не дергаем повторно
+      if (status === 'needconn') {
+        startConnection();
+      }
+
+    startConnection();
 
     return () => {
-      isCancelled = true;
+      abortController.abort(); // отменяем при размонтировании
     };
-  }, [connectRoom]);
+  }, [status, connectRoom]);
+
 
 
   return status;
@@ -357,7 +386,7 @@ export const useLeaveRoom = () => {
     };
 
     leaveAsync();
-  }, [roomId, user, status, leaveRoom, dispatch]);
+  }, [socket, roomId, user, status, leaveRoom, dispatch]);
 
   return status;
 };
@@ -463,7 +492,7 @@ export const useSetterAudioOnly = () => {
     }, 500);
     
     return () => clearTimeout(timer);
-  }, [dispatch, Iam.myPeer.audioOnly, ])
+  }, [socket, dispatch, Iam.myPeer.audioOnly, ])
 }
 
 export const useSetterMute = () => {

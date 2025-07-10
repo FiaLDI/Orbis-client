@@ -29,9 +29,9 @@ const Profile: React.FC = () => {
     
     return (
         <ModalLayout> 
-            <div className="p-10" ref={profileRef}>
-                <div className="">
-                    <div className="info">
+            <div className="p-10 text-white" ref={profileRef}>
+                <div className="flex flex-col gap-10">
+                    <div className="flex items-end">
                         <div className="avatar">
                             <img src={userInfo && userInfo.avatar_url ? userInfo.avatar_url : "/img/icon.png"} alt="" className="" /> <span></span>
                         </div>
@@ -40,7 +40,7 @@ const Profile: React.FC = () => {
                         </div>
                         
                     </div>
-                    <div className="manage-info">
+                    <div className="flex justify-between">
                         <button className={infoStage === 0 ? "active": ""} onClick={() => setInfoStage(0)}>About</button>
                         <button className={infoStage === 1 ? "active": ""} onClick={() => setInfoStage(1)}>Mutual friends</button>
                         <button className={infoStage === 2 ? "active": ""} onClick={() => setInfoStage(2)}>Mutual servers</button>

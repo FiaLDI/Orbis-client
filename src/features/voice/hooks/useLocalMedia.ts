@@ -1,5 +1,5 @@
 // hooks/useLocalMedia.ts
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useMediaStreamContext } from "@/contexts/MediaStreamContext";
 
 export const useLocalMedia = () => {

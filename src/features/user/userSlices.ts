@@ -1,7 +1,7 @@
 // features/authSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { UserInfo, userState } from "./types/user";
+import { ModeKeys, UserInfo, userState } from "./types/user";
 import { userApi } from "./api/userApi";
 
 
@@ -23,6 +23,7 @@ const initialState: userState = {
         `,
     },
     isOpenProfile: false,
+    friendsMode: 'All'
 };
 
 const userSlice = createSlice({
@@ -41,6 +42,9 @@ const userSlice = createSlice({
         },
         endSearch(state) {
             state.isSearchActive = false;
+        },
+        setFriendMode(state, action: PayloadAction<ModeKeys>) {
+            state.friendsMode = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -84,6 +88,6 @@ const userSlice = createSlice({
     },
 });
 
-export const { setProfile, closeProfile, startSearch, endSearch } = userSlice.actions;
+export const { setFriendMode, setProfile, closeProfile, startSearch, endSearch } = userSlice.actions;
 
 export default userSlice.reducer;

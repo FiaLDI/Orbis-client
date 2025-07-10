@@ -8,6 +8,7 @@ import { PoliticalPage } from "@/page/Political";
 import AuthPageController from "@/page/Auth";
 import { CommunicatePage } from "@/page/Communicate";
 import { useRefreshTokenMutation } from "@/features/auth";
+import { SettingAppPage } from "./page/Settings";
 
 const ProtectedRoute: React.FC<{
     isAuth: boolean;
@@ -84,14 +85,14 @@ export const PagesRouter: React.FC = () => {
                     }
                 />
                 
-                {/* <Route 
+                <Route 
                     path="/app/settings"
                     element= {
                         <ProtectedRoute isAuth={isAuth}>
                             <SettingAppPage />
                         </ProtectedRoute>
                     }
-                /> */}
+                />
                 <Route
                     path="/app"
                     element={

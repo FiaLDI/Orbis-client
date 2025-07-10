@@ -3,6 +3,8 @@ import { ModalLayout } from "@/components/layout/Modal/Modal";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { finallyCreateServer } from "../../serverSlices";
 import { useCreateSeverMutation, useJoinServerMutation, useLazyGetServersQuery } from "../../api/serverApi";
+import { ModalButton } from "@/components/ui/Button/ModalButton";
+import { ModalInput } from "@/components/ui/Input/ModalInput";
 
 const AddServerForm: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -66,19 +68,23 @@ const AddServerForm: React.FC = () => {
 
     return (
         <ModalLayout> 
-            <div className="connect-server create-server-form" ref={createServerRef}>
-                <h2>Creating a server</h2>
-                <p>The server is a place where you can spend time with friends</p>
-                <input type="text" placeholder="Enter server name" name="servername" value={nameServer} onChange={(e) => {
-                    if (e.target.value) {
-                        setNameServer(e.target.value);
-                    }
-                    
-                }} />
-                <button onClick={() =>createrServerHandler()}>Create</button>
+            <div className="p-10 text-white flex flex-col gap-3 w-full" ref={createServerRef}>
+                <h2 className="text-2xl text-center bg-[#1a40eb]">Creating a server</h2>
+                <p className="bg-[#1a40eb]">The server is a place where you can spend time with friends</p>
+                <ModalInput 
+                    placeHolder="Enter server name" 
+                    name="servername" 
+                    value={nameServer || ""}
+                    change={(e) => setNameServer((e.target as HTMLInputElement).value)}
+                />
+                <ModalButton handler={() =>createrServerHandler()}>Create</ModalButton>
                 <p>You can also join by id</p>
-                <input type="text" placeholder="Enter server id" name="serverid" value={idServer} onChange={(e) => {setIdServer(e.target.value)}} />
-                <button onClick={() => joinServerHandler()}>Connect</button>
+                <ModalInput 
+                    placeHolder="Enter server id" 
+                    name="serverid" 
+                    value={idServer || ""} 
+                    change={(e) => {setIdServer((e.target as HTMLInputElement).value)}} />
+                <ModalButton handler={() => joinServerHandler()}>Connect</ModalButton>
             </div>
         </ModalLayout>
         

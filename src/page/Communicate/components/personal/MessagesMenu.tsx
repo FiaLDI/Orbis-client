@@ -4,6 +4,7 @@ import { setActiveChat } from "@/features/chat";
 import { ChatItem } from "./ChatItem";
 import { VoiceComponets } from "@/features/voice";
 import { useGetChatsUsersQuery } from "@/features/user";
+import { MenuButton } from "../ui/Button";
 
 export const MessageMenu: React.FC = () => {
     const chats = useAppSelector((state) => state.user.chats);
@@ -12,26 +13,26 @@ export const MessageMenu: React.FC = () => {
     
     return (
         <>
-            <div className="flex flex-col bg-[rgba(81,110,204,0.5)] p-5 pl-7 pr-7 gap-5 justify-between h-full">
+            <div className="flex flex-col bg-[rgba(81,110,204,0.12)] p-5  gap-5 justify-between h-full min-w-[250px] max-w-[250px]">
                 <div className="flex flex-col gap-5 h-full">
-                <div className=" flex flex-col gap-5">
+                <div className=" flex flex-col gap-5 text-white ">
                     <div className="">
-                        <button className="bg-amber-500 brightness-100 w-full pt-1 pb-1">Search</button>
+                        <MenuButton handler={()=>{}}>Search</MenuButton>
                     </div>
                     <div className="">
-                        <button className="bg-amber-500 brightness-100 w-full pt-1 pb-1" onClick={() => dispatch(setActiveChat(undefined))}>Friends</button>
+                        <MenuButton handler={() => dispatch(setActiveChat(undefined))}>Friends</MenuButton>
                     
                     </div>
                 </div>
                 
-                <ul className="flex flex-col gap-2 h-full bg-[#2e3ed34f] text-white p-2" >
+                <ul className="flex flex-col gap-2 h-full  text-white rounded-[5px]" >
                     {chats &&
                         chats.map((val, index) => (
                             <ChatItem key={index} chat={val} />
                         ))}
                 </ul>
                 <div className="personal-manager">
-                        <VoiceComponets.VoiceManager />
+                    <VoiceComponets.VoiceManager />
                 </div>
                 </div>
                 
