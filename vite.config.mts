@@ -11,6 +11,12 @@ const socketServerUrl =
 export default defineConfig({
     plugins: [tailwindcss(), react()],
     server: {
+        host: '0.0.0.0',
+        port: 5173,
+        strictPort: true,
+        watch: {
+            usePolling: true,  // помогает в Docker для отслеживания файлов
+        },
         https: {
             key: fs.readFileSync(
                 path.resolve(__dirname, "ssl/selfsigned_key.pem"),
