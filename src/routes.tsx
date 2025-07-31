@@ -25,7 +25,7 @@ export const PagesRouter: React.FC = () => {
     const isAuth =
         useAppSelector((state) => state.auth.isAuthenticated) || false;
     const [data, { isLoading }] = useRefreshTokenMutation({});
-    const [isRefreshing, setIsRefreshing] = useState(true);
+    const [isRefreshing, setIsRefreshing] = useState(false);
 
     const refresh = async () => {
         try {
@@ -39,7 +39,7 @@ export const PagesRouter: React.FC = () => {
     };
 
     useEffect(() => {
-        refresh();
+        //refresh();
     }, []);
 
     if (isRefreshing) {
@@ -53,9 +53,7 @@ export const PagesRouter: React.FC = () => {
                     path="/"
                     element={
                         <Layout>
-                                <CustomScroll>
                                     <HomePage />
-                                </CustomScroll>
                         </Layout>
                     }
                 />

@@ -17,6 +17,7 @@ const AudioManager: React.FC = () => {
     }, []);
 
     useEffect(() => {
+        
         return () => {
             Object.values(audioRefs.current).forEach(el => {
                 if (el) {
@@ -34,6 +35,11 @@ const AudioManager: React.FC = () => {
             {Object.entries(remoteAudioStreams).map(([peerId, stream]) => {
                 const matchedPeer = peers.find(peer => peer.peerId === peerId);
                 const isMuted = matchedPeer?.muted ?? false;
+                console.log(`Mounting audio for ${peerId}`, {
+                    tracks: stream.getAudioTracks(),
+                    enabled: stream.getAudioTracks().map(t => t.enabled),
+                    muted: isMuted,
+                });
 
                 return (
                     <audio

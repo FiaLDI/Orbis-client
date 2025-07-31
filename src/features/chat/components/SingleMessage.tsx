@@ -32,7 +32,7 @@ const SingleMessageComponent: React.FC<SingleMessageProps> = ({ message, onClick
             {val.type === "url" ? (
               val.text.match(/\.(jpeg|jpg|png|gif)$/i) ? (
                 <div>
-                  <img src={val.text} alt="image" style={{ maxWidth: "700px" }} />
+                  <img src={val.url} alt="image" style={{ maxWidth: "700px" }} />
                 </div>
               ) : (
                 <>

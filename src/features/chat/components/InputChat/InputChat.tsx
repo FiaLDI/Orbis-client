@@ -54,30 +54,30 @@ const InputChat: React.FC<InputChatProps> = ({ scrollToBottom }) => {
     };
 
     const handleFileUploaded = (url: string) => {
-    if (!chat_id || !UserInfo) return;
-        console.log(url)
-    const fileMessage = {
-      id: chat_id,
-      data: {
-        content: { url  },
-        reply_to_id: null,
-        username: UserInfo.username,
-        user_id: UserInfo.id,
-        chat_id: chat_id,
-      }
-    };
-
-    dispatch(sendMessageVisual({
-      id: Date.now(),
-      content: [{ type:"url", text: url }],
+  if (!chat_id || !UserInfo) return;
+  const fileMessage = {
+    id: chat_id,
+    data: {
+      content: { url },
+      reply_to_id: null,
       username: UserInfo.username,
       user_id: UserInfo.id,
-      is_edited: false,
-      timestamp: new Date().toLocaleTimeString(),
-    }));
-
-    sendMessage(fileMessage);
+      chat_id: chat_id,
+    }
   };
+
+  dispatch(sendMessageVisual({
+    id: Date.now(),
+    content: [{ type: "url", text: url }],
+    username: UserInfo.username,
+    user_id: UserInfo.id,
+    is_edited: false,
+    timestamp: new Date().toLocaleTimeString(),
+  }));
+
+  sendMessage(fileMessage);
+};
+
 
     useEffect(() => {
         if (activeChat) {

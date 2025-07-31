@@ -10,10 +10,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({
         <>
             <Main></Main>
             <Header />
-            <main className=" max-full">
-                <div className="max-w-11/12 mb-0 mt-0 ml-auto mr-auto">
+            <main className="w-full">
                 {children}
-                </div>
             </main>
             <Footer />
         </>
