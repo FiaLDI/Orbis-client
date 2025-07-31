@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Main } from "@/components/layout/Main";
 import { LoginForm, RegisterForm } from "@/features/auth";
 
 const AuthPageController: React.FC<{ type: string }> = ({ type }) => {
@@ -8,7 +7,6 @@ const AuthPageController: React.FC<{ type: string }> = ({ type }) => {
 
     return (
         <>
-            <Main></Main>
             <div className="fixed top-5 left-5 text-white cursor-pointer p-5" onClick={() => navigator("/")}>
                 На главную
             </div>

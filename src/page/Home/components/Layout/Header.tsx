@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ScrollToTop from "@/components/scroll/ScrolltoUP";
-import ScrollTop from "@/components/scroll/Top";
 import { Menu } from "lucide-react";
+import { NavBar } from "../Shared/NavBar";
 
 export const Header = () => {
     const navigator = useNavigate();
@@ -33,28 +32,7 @@ export const Header = () => {
         }
     }, []);
 
-    const NavBar = () => {
-        
-        return (
-            <ul
-                className={
-                    !(window.innerWidth < 1199)
-                        ? "flex gap-10"
-                        : "top-40 flex-col bg-blue-950 w-full text-4xl"
-                }
-            >
-                <li className="p-3" onClick={() => handleBurger("/")}>Загрузить</li>
-                <li className="p-3" onClick={() => handleBurger("/")}>
-                    Узнать больше
-                </li>
-                <li className="p-3" onClick={() => handleBurger("/political")}>
-                    Политика
-                </li>
-                <li className="p-3" onClick={() => handleBurger("/")}>Поддержка</li>
-                
-            </ul>
-        )
-    }
+    
 
     return (
             <header className="  bg-[rgba(54,62,180,0.27)] text-white ">

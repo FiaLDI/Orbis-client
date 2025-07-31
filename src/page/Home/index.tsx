@@ -6,6 +6,7 @@ import { SectionLayout } from "./components/Layout/SectionLayout";
 import { ShowCase } from "./sections/Showcase";
 import { Slider } from "./sections/Slider";
 import { Start } from "./sections/Start";
+import { Support } from "./sections/Support";
 
 export const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ export const HomePage = () => {
             <ShowCase /> 
             <Slider />
             <Start />
+            <Support />
         </>
     );
 };

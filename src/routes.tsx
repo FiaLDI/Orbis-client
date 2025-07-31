@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { HomePage } from "@/page/Home/index";
-import { Layout } from "@/components/layout/Layout";
-import CustomScroll from "@/components/scroll/CustomScroll";
+import { Layout } from "@/page/Home/components/Layout/Layout";
 import { useAppSelector } from "@/app/hooks";
 import { PoliticalPage } from "@/page/Political";
 import AuthPageController from "@/page/Auth";
@@ -53,7 +52,7 @@ export const PagesRouter: React.FC = () => {
                     path="/"
                     element={
                         <Layout>
-                                    <HomePage />
+                            <HomePage />
                         </Layout>
                     }
                 />
