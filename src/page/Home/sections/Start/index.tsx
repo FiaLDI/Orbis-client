@@ -7,11 +7,11 @@ import { TitleSection } from "../../components/UI/TitleSection";
 export const Start = () => {
 
     return (
-        <div className="">
+        <div className="" id="start">
             <SectionLayout classListContainer="gap-5">
                 <TitleSection>Начать общаться</TitleSection>
-                <div className="flex flex-col gap-10">
-                    <div className="lg:w-1/2 flex flex-col gap-5 border-x-2 p-5 border-white -m-x-2">
+                <div className="flex flex-col gap-10 lg:flex-row lg:justify-between">
+                    <div className="lg:w-1/2  flex flex-col gap-5 border-x-2 p-5 border-white -m-x-2">
                         <h3 className="text-3xl">ПК и мобильный телефон</h3>
                         <ul className="[&>li]:text-2xl">
                             <li>Регистрация ссылке</li>

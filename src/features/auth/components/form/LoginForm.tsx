@@ -28,9 +28,9 @@ export const LoginForm: React.FC = () => {
 
     return (
         <>
-            <div className="auth p-10 bg-[#04122f80] text-white">
+            <div className="auth p-20 lg:p-10 bg-[#04122f80] text-white">
                 <form onSubmit={handleSubmit(onSubmit)} autoComplete="off" className="flex flex-col gap-10 ">
-                    <h1 className="text-2xl text-center">Войти в аккаунт</h1>
+                    <h1 className="text-5xl lg:text-2xl text-center">Войти в аккаунт</h1>
                     <InputField<LoginFormData>
                         type="email"
                         placeholder="Почта"
@@ -49,7 +49,7 @@ export const LoginForm: React.FC = () => {
                     />
                     <SubmitButton label="Вход" disabled={isLoading} />
                     {error && <div>Error: {(error as any).data?.message}</div>}
-                    <span className="relative text-center" style={{ textAlign: "center", position: "relative" }}>
+                    <span className="relative text-center text-3xl lg:text-base" style={{ textAlign: "center", position: "relative" }}>
                         <a
                             href=""
                             onClick={(e) => {

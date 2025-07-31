@@ -7,7 +7,7 @@ import { TitleSection } from "../../components/UI/TitleSection";
 export const ShowCase = () => {
 
     return (
-        <div className="">
+        <div className="text-center" id="Узнать больше">
             <SectionLayout>
                 <TitleSection>ДРУЗЬЯ, ЧАТЫ,<br />ОБЩЕНИЕ - ВСЁ ЗДЕСЬ!</TitleSection>
                 <div className="">

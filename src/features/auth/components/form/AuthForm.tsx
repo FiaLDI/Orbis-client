@@ -26,10 +26,11 @@ export const InputField = <T extends FieldValues>({
     error,
     validation,
 }: InputFieldProps<T>) => (
-    <div>
+    <div className="w-2xl lg:w-[400px]">
         <input
             type={type}
             placeholder={placeholder}
+            className="text-3xl w-full lg:text-base box-border p-4 outline-none border-b-2"
             {...register(name, validation)}
         />
         {error && <div>{error.message}</div>}
@@ -46,7 +47,7 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
     label,
     disabled,
 }) => (
-    <button type="submit" disabled={disabled}>
+    <button type="submit" disabled={disabled} className="text-3xl lg:text-base">
         {label}
     </button>
 );

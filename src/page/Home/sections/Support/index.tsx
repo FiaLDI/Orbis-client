@@ -28,8 +28,8 @@ export const Support = () => {
     };
 
     return (
-        <div className="bg-[rgba(27,30,75,0.3)]">
-            <SectionLayout classListContainer="gap-10">
+        <div className="bg-[rgba(27,30,75,0.3)]" id="support">
+            <SectionLayout classListContainer="gap-10 lg:!max-w-2xl">
                 <div className="flex flex-col gap-5">
                     <TitleSection>ПОДДЕРЖКА</TitleSection>
                     <p className="text-2xl text-center">Здесь вы можете обратиться за помощью по любому интересующему вас вопросу</p>
