@@ -70,7 +70,7 @@ const HistoryChat: React.FC<{ bottomRef: React.RefObject<HTMLDivElement> }> = ({
     }
   
     return (
-        <div className="overflow-y-scroll bg-[#25309b88] p-4 h-screen text-white flex flex-col gap-3"  >
+        <div className="overflow-y-auto bg-[#25309b88] p-4 h-[calc(100vh_-_370px)] lg:h-screen text-white flex flex-col gap-3"  >
             {history.map((message: any, idx) => (
                 <SingleMessage 
                     key={`single-${message.chat_id}-${idx}`} 

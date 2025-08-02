@@ -3,7 +3,7 @@ import { setActiveChat, useChatMessages } from "@/features/chat";
 import { CreateServerForm, setActiveServer, useLazyGetServersInsideQuery, useLazyGetServersMembersQuery } from "@/features/server";
 import { FriendList, Search, UserProfile } from "@/features/user";
 import { setBigMode, VoiceComponets } from "@/features/voice";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AppMenu } from "./components/AppMenu";
 import { MessageMenu } from "./components/personal/MessagesMenu";
 import { MemberChatServer } from "./components/server/MemberChatServer";
@@ -21,6 +21,7 @@ export const CommunicatePage: React.FC = () => {
     const bigMode = useAppSelector(s => s.voice.bigMode);
     const [trigger] = useLazyGetServersMembersQuery();
     const [getServer] = useLazyGetServersInsideQuery();
+    const [isMessageMenuOpen, setIsMessageMenuOpen] = useState(true);
     
     const activeServerId = server.activeserver?.id;
     
@@ -70,7 +71,7 @@ export const CommunicatePage: React.FC = () => {
     }
 
     return (
-        <div className="flex h-screen w-screen">
+        <div className="flex flex-col lg:flex-row h-screen w-screen">
 
             {/* {Меню приложения} */}
             <AppMenu />
@@ -83,9 +84,12 @@ export const CommunicatePage: React.FC = () => {
 
             {/* {Поиск друзей} */}
             <Search />
-
+            <div className="w-full flex h-full relative">
             {/* {чаты пользователя} */}
-            <MessageMenu />
+            {isMessageMenuOpen ? <MessageMenu /> :null}
+            
+
+            
 
             {(isConnection && bigMode) &&
                 <div className="w-full h-full flex flex-col justify-between items-center p-10">
@@ -95,7 +99,7 @@ export const CommunicatePage: React.FC = () => {
 
             {/* {Чат} */}
             {(hasActiveChat && !bigMode) ? (
-                <div className="w-full h-screen">
+                <div className="w-full h-full lg:h-screen">
                     <Action />
                 </div>
                 
@@ -103,7 +107,7 @@ export const CommunicatePage: React.FC = () => {
 
             {/* {Список друзей} */}
             {!hasActiveChat && !hasActiveServer && <FriendList />}
-
+            </div>
 
             {/* {Аудио менеджер} */}
             <VoiceComponets.AudioManager />

@@ -11,4 +11,5 @@ export interface action {
 
 export interface actionSlicis {
     Action: action[];
+    isPersonalCommunicateActive: boolean
 }

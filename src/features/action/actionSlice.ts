@@ -1,10 +1,10 @@
-// features/authSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { action, actionSlicis } from "./types/visible";
 
 
 const initialState: actionSlicis = {
     Action: [],
+    isPersonalCommunicateActive: true,
 };
 
 const actionSlice = createSlice({
@@ -16,13 +16,17 @@ const actionSlice = createSlice({
         },
         removeAction(state, action: PayloadAction<number>) {
             state.Action = state.Action.filter(val => val.id !== action.payload);
-        }
+        },
+        setActivePersonalCommunicate(state, action: PayloadAction<boolean>) {
+            state.isPersonalCommunicateActive = action.payload;
+        },
     }
 });
 
 export const {
     addAction,
-    removeAction
+    removeAction,
+    setActivePersonalCommunicate
 } = actionSlice.actions;
 
 export default actionSlice.reducer;

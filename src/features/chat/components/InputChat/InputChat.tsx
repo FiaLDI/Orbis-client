@@ -87,7 +87,7 @@ const InputChat: React.FC<InputChatProps> = ({ scrollToBottom }) => {
         }
     }, [data]);
     return (
-        <div className="bg-[#2040b6] flex justify-between items-center">
+        <div className="bg-[#2040b6] flex justify-between items-center shrink-0">
             <input
                 ref={inputRef}
                 type="text"

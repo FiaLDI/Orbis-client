@@ -12,23 +12,22 @@ const SingleMessageComponent: React.FC<SingleMessageProps> = ({ message, onClick
     <div
       onContextMenu={onClick}
       
-      className={isOpen ? " bg-[#7895f3] flex gap-3" : "flex gap-3"}
+      className={isOpen ? " bg-[#7895f3] flex gap-5 lg:gap-3" : "flex gap-5 lg:gap-3 "}
     >
       <div className=" self-start p-1">
         <img
           src="/img/icon.png"
           alt={`Аватар ${message.username}`}
-          width={40}
-          height={40}
+          className="w-20 h-20 lg:w-10 lg:h-10"
         />
       </div>
       <div className="" >
-        <h3 className="">
+        <h3 className="text-3xl lg:text-base">
           {message.username}
-          <span className=""> {message.timestamp.slice(0, 5)}</span>
+          <span className="text-2xl lg:text-base"> {message.timestamp.slice(0, 4)}</span>
         </h3>
         {message.content?.map((val) => (
-          <div className="text" key={`message-text-${val.id}`}>
+          <div className="text-3xl lg:text-base" key={`message-text-${val.id}`}>
             {val.type === "url" ? (
               val.text.match(/\.(jpeg|jpg|png|gif)$/i) ? (
                 <div>

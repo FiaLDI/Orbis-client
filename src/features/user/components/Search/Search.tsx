@@ -70,24 +70,24 @@ const Search: React.FC = () => {
     if (!check) return null;
     return (
         <ModalLayout> 
-            <div className="p-10 text-white" ref={searchRef}>
-                <h2 className="text-2xl">Search friend by name</h2>
+            <div className="p-10 text-white flex flex-col gap-5" ref={searchRef}>
+                <h2 className="text-center text-5xl lg:text-2xl">Search friend by name</h2>
                 <input 
                     type="text" 
                     onChange={handleChange} 
                     value={find}
                     placeholder="Enter name"
-                    className=" box-border border-b-1 outline-0 w-full"
+                    className=" box-border border-b-1 outline-0 w-full text-4xl lg:text-base"
                 />
                 <ul className="result">
-                    <h3>Results:</h3>
+                    <h3 className="text-5xl lg:text-2xl border-b border-b-[#ffffff3a]">Results:</h3>
                     {data && data.map((val: any, idx: number) => {
 
                         if (val.id == myid) return null
                         return(
                         <li key={`seatch-user-${idx}`} className="flex gap-10 bg-[#4a55e9] p-3 justify-between">
                             <div className="flex items-center gap-2">
-                                <img src={val.avatar_url} alt="" width={"40px"} height={"40px"}/><span>{val.username}</span>
+                                <img src={val.avatar_url} alt="" className="w-15 h-15 lg:w-10 lg:h-10"/><span className="text-3xl lg:text-base">{val.username}</span>
                             </div>
                             <div className="flex gap-5 ">
                                 <ModalButton handler={()=> startChatting(val.id)}>Message</ModalButton>

@@ -103,7 +103,7 @@ export const RegisterForm: React.FC = () => {
                         >
                             <div className="">
                                 <h1 className="text-3xl text-center">Инициирование регистрации</h1>
-                                <p className="text-center text-2xl">Подтверждение почты</p>
+                                
                             </div>
                             <div className="relative">
                             <InputField<EmailFormData>
@@ -153,7 +153,7 @@ export const RegisterForm: React.FC = () => {
                         autoComplete="off"
                         className="flex flex-col gap-10 "
                     >
-                        <h1 className="text-2xl text-center">Регистрация</h1>
+                        <h1 className="text-3xl text-center">Регистрация</h1>
                         <InputField<RegisterFormData>
                             type="password"
                             placeholder="Пароль"
@@ -189,7 +189,7 @@ export const RegisterForm: React.FC = () => {
                         <SubmitButton label="Зарегистрироваться" />
                     </form>
                 )}
-                <span className="text-center relative text-2xl" style={{ textAlign: "center", position: "relative" }}>
+                <span className="text-center relative text-3xl" style={{ textAlign: "center", position: "relative" }}>
                     <a
                         href=""
                         onClick={(e) => {

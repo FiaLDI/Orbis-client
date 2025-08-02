@@ -67,27 +67,23 @@ export const Action: React.FC = () => {
             return;
         }
 
-        // Хук useConnectToVoiceRoom выполнит подключение сам (у тебя он срабатывает по useEffect)
         dispatch(setStatus('needconn'));
-
     };
-
-
 
     return (
         <ErrorBoundary>
             {!(bigMode && isConnection) && <>
                 {activeChat && (
                 
-                    <div className="flex flex-col h-full p-5 rounded-[5px]">
-                        <div className="flex bg-[#2e3ed328] text-white text-1xl justify-between items-center flex-wrap">
-                            <div className="pl-5 p-2">
+                    <div className="flex flex-col h-full p-5 rounded-[5px] lg:h-screen  ">
+                        <div className="flex bg-[#2e3ed328] text-white text-1xl justify-between items-center flex-wrap shrink-0">
+                            <div className="text-5xl lg:text-base pl-5 p-2">
                                 {activeChat.username} { roomPeers.length > 0 && <span>Активный звонок {roomPeers.length}</span>}
                             </div>
-                            <div className="flex gap-5 bg-[#2e3ed328] pr-5 pl-5 p-2 flex-wrap">
-                            <div className="
+                            <div className="flex gap-5 bg-[#2e3ed328] pr-10 lg:pr-5 pl-10 lg:pl-5 p-5 lg:p-2 w-full lg:w-auto justify-end">
+                            <div className="w-full lg:w-auto 
                             ">
-                                <input type="text" className="rounded-[5px] bg-[#2e3ed328] pl-1" placeholder="Search" />
+                                <input type="text" className="w-full lg:w-auto text-5xl lg:text-base rounded-[5px] bg-[#2e3ed328] pl-1" placeholder="Search" />
                             </div>
                             <div className="flex items-center">
                                 
@@ -97,7 +93,7 @@ export const Action: React.FC = () => {
                                     disabled={isConnection}
                                     
                                 >
-                                    <Phone color="#fff" strokeWidth={1.25} />
+                                    <Phone color="#fff" strokeWidth={1.25}  className="w-15 h-15 lg:w-auto lg:h-auto"/>
                                 </button>
                                 
                             </div>
